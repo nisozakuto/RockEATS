@@ -64,12 +64,14 @@ header{
   justify-self: flex-end;
   justify-items: flex-end;
   justify-content: flex-end;
+  background-color: rgb(80,	142,	207);;
 }
 
 header ul{
   display: flex;
   flex-direction: row;
   list-style-type: none;
+  margin: 5px 0;
 }
 
 header ul li{
@@ -79,7 +81,7 @@ header ul li{
 }
 
 header ul li:hover{
-  background-color: pink;
+  background-color: white;
   cursor: pointer;
 }
 

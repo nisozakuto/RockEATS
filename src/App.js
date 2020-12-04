@@ -3,39 +3,73 @@ import "./App.css";
 import Headers from "./components/Headers";
 
 export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      query: "",
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.fetchRecipes(this.state.query);
+  }
+
+  handleChange(event) {
+    this.setState({ query: event.target.value });
+  }
+
+  fetchRecipes(
+    query,
+    cuisine,
+    diet,
+    excludeIngredients,
+    intolerances,
+    number,
+    offset,
+    type,
+    limitLicense,
+    instructionsRequired
+  ) {
+    fetch(
+      `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?query=${query}`,
+      {
+        method: "GET",
+        headers: {
+          "x-rapidapi-key":
+            "65ff9c2433msh42006bcc25a216cp10d91fjsnb9884c39d06c",
+          "x-rapidapi-host":
+            "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        },
+      }
+    )
+      .then((response) => {
+        console.log(response);
+        console.log("coming");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
   render() {
     return (
       <div>
         <Headers />
         <main>
           <section id="search">
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <label>Search your zip code</label>
-              <input placeholder="11001" type="number"></input>
+              <input
+                placeholder="11001"
+                value={this.state.query}
+                onChange={this.handleChange}
+              ></input>
               <input type="submit" value="Search"></input>
             </form>
           </section>
         </main>
-        <footer>
-          <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 4</li>
-          </ul>
-          <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 4</li>
-          </ul>
-          <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 4</li>
-          </ul>
-        </footer>
       </div>
     );
   }
