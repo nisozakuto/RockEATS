@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import "./App.css";
 import Headers from "./components/Headers";
+import Footer from "./components/Footer";
+import SearchResults from "./components/SearchResults";
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
       query: "",
+      results: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,9 +48,12 @@ export default class App extends Component {
         },
       }
     )
+      .then((res) => res.json())
       .then((response) => {
         console.log(response);
-        console.log("coming");
+        this.setState({
+          results: response,
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -60,16 +66,18 @@ export default class App extends Component {
         <main>
           <section id="search">
             <form onSubmit={this.handleSubmit}>
-              <label>Search your zip code</label>
+              <label>Search the food</label>
               <input
-                placeholder="11001"
+                placeholder="Burger, Pizza, Pasta"
                 value={this.state.query}
                 onChange={this.handleChange}
               ></input>
               <input type="submit" value="Search"></input>
             </form>
           </section>
+          <SearchResults results={this.state.results} />
         </main>
+        <Footer />
       </div>
     );
   }
