@@ -1,14 +1,21 @@
 import React, { Component } from "react";
 import "./App.css";
+import Headers from "./components/Headers";
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <header>
-          <p>RockEATS</p>
-        </header>
-        <main></main>
+        <Headers />
+        <main>
+          <section id="search">
+            <form>
+              <label>Search your zip code</label>
+              <input placeholder="11001" type="number"></input>
+              <input type="submit" value="Search"></input>
+            </form>
+          </section>
+        </main>
         <footer>
           <ul>
             <li>Item 1</li>
