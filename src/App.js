@@ -15,6 +15,7 @@ export default class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {}
   handleSubmit(event) {
     event.preventDefault();
     this.fetchRecipes(this.state.query);
@@ -41,7 +42,8 @@ export default class App extends Component {
       {
         method: "GET",
         headers: {
-          "x-rapidapi-key": "",
+          // "x-rapidapi-key": process.env.REACT_APP_API_KEY,
+          "x-rapidapi-key": process.env.REACT_APP_API_KEY,
           "x-rapidapi-host":
             "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
         },
